@@ -21,9 +21,13 @@
 		AA7665C516FA53780036E7C4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7665C416FA53780036E7C4 /* Default-568h@2x.png */; };
 		AA7665C916FA53780036E7C4 /* SDKTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AA7665C716FA53780036E7C4 /* SDKTest.xcdatamodeld */; };
 		AA7665CC16FA53780036E7C4 /* SDKTestIncrementalStore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7665CB16FA53780036E7C4 /* SDKTestIncrementalStore.m */; };
+		AA7665D716FA84F20036E7C4 /* SDKServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7665D616FA84F20036E7C4 /* SDKServerManager.m */; };
+		E73E210741434606B8E09D14 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 184B4C20E8044617B9E228DB /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		184B4C20E8044617B9E228DB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		716EB5C2EF7A42F89605A4A1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		AA7665A316FA53780036E7C4 /* SDKTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDKTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA7665A616FA53780036E7C4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AA7665A816FA53780036E7C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -44,6 +48,8 @@
 		AA7665C816FA53780036E7C4 /* SDKTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SDKTest.xcdatamodel; sourceTree = "<group>"; };
 		AA7665CA16FA53780036E7C4 /* SDKTestIncrementalStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SDKTestIncrementalStore.h; path = Classes/SDKTestIncrementalStore.h; sourceTree = "<group>"; };
 		AA7665CB16FA53780036E7C4 /* SDKTestIncrementalStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SDKTestIncrementalStore.m; path = Classes/SDKTestIncrementalStore.m; sourceTree = "<group>"; };
+		AA7665D516FA84F20036E7C4 /* SDKServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDKServerManager.h; sourceTree = "<group>"; };
+		AA7665D616FA84F20036E7C4 /* SDKServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDKServerManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,7 @@
 				AA7665A916FA53780036E7C4 /* Foundation.framework in Frameworks */,
 				AA7665AB16FA53780036E7C4 /* CoreGraphics.framework in Frameworks */,
 				AA7665AD16FA53780036E7C4 /* CoreData.framework in Frameworks */,
+				E73E210741434606B8E09D14 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +74,7 @@
 				AA7665AE16FA53780036E7C4 /* SDKTest */,
 				AA7665A516FA53780036E7C4 /* Frameworks */,
 				AA7665A416FA53780036E7C4 /* Products */,
+				716EB5C2EF7A42F89605A4A1 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +93,7 @@
 				AA7665A816FA53780036E7C4 /* Foundation.framework */,
 				AA7665AA16FA53780036E7C4 /* CoreGraphics.framework */,
 				AA7665AC16FA53780036E7C4 /* CoreData.framework */,
+				184B4C20E8044617B9E228DB /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -123,6 +132,8 @@
 				AA7665B516FA53780036E7C4 /* SDKTestAPIClient.m */,
 				AA7665CA16FA53780036E7C4 /* SDKTestIncrementalStore.h */,
 				AA7665CB16FA53780036E7C4 /* SDKTestIncrementalStore.m */,
+				AA7665D516FA84F20036E7C4 /* SDKServerManager.h */,
+				AA7665D616FA84F20036E7C4 /* SDKServerManager.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -145,6 +156,7 @@
 				AA76659F16FA53780036E7C4 /* Sources */,
 				AA7665A016FA53780036E7C4 /* Frameworks */,
 				AA7665A116FA53780036E7C4 /* Resources */,
+				6926D3AB5A944685B77B21FD /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -196,6 +208,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6926D3AB5A944685B77B21FD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AA76659F16FA53780036E7C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -206,6 +235,7 @@
 				AA7665BF16FA53780036E7C4 /* AppDelegate.m in Sources */,
 				AA7665C916FA53780036E7C4 /* SDKTest.xcdatamodeld in Sources */,
 				AA7665CC16FA53780036E7C4 /* SDKTestIncrementalStore.m in Sources */,
+				AA7665D716FA84F20036E7C4 /* SDKServerManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +311,7 @@
 		};
 		AA7665D016FA53780036E7C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 716EB5C2EF7A42F89605A4A1 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SDKTest/SDKTest-Prefix.pch";
@@ -292,6 +323,7 @@
 		};
 		AA7665D116FA53780036E7C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 716EB5C2EF7A42F89605A4A1 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SDKTest/SDKTest-Prefix.pch";
@@ -320,6 +352,7 @@
 				AA7665D116FA53780036E7C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
