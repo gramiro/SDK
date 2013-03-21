@@ -22,6 +22,8 @@
 		AA7665C916FA53780036E7C4 /* SDKTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AA7665C716FA53780036E7C4 /* SDKTest.xcdatamodeld */; };
 		AA7665CC16FA53780036E7C4 /* SDKTestIncrementalStore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7665CB16FA53780036E7C4 /* SDKTestIncrementalStore.m */; };
 		AA7665D716FA84F20036E7C4 /* SDKServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7665D616FA84F20036E7C4 /* SDKServerManager.m */; };
+		AA7665DA16FA8E380036E7C4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7665D916FA8E380036E7C4 /* RootViewController.m */; };
+		AA7665DD16FA8F210036E7C4 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7665DC16FA8F200036E7C4 /* DemoViewController.m */; };
 		E73E210741434606B8E09D14 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 184B4C20E8044617B9E228DB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,10 @@
 		AA7665CB16FA53780036E7C4 /* SDKTestIncrementalStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SDKTestIncrementalStore.m; path = Classes/SDKTestIncrementalStore.m; sourceTree = "<group>"; };
 		AA7665D516FA84F20036E7C4 /* SDKServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDKServerManager.h; sourceTree = "<group>"; };
 		AA7665D616FA84F20036E7C4 /* SDKServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDKServerManager.m; sourceTree = "<group>"; };
+		AA7665D816FA8E380036E7C4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		AA7665D916FA8E380036E7C4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		AA7665DB16FA8F200036E7C4 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
+		AA7665DC16FA8F200036E7C4 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +110,10 @@
 				AA7665AF16FA53780036E7C4 /* Podfile */,
 				AA7665BD16FA53780036E7C4 /* AppDelegate.h */,
 				AA7665BE16FA53780036E7C4 /* AppDelegate.m */,
+				AA7665D816FA8E380036E7C4 /* RootViewController.h */,
+				AA7665D916FA8E380036E7C4 /* RootViewController.m */,
+				AA7665DB16FA8F200036E7C4 /* DemoViewController.h */,
+				AA7665DC16FA8F200036E7C4 /* DemoViewController.m */,
 				AA7665B316FA53780036E7C4 /* Networking */,
 				AA7665C616FA53780036E7C4 /* Models */,
 				AA7665B116FA53780036E7C4 /* Supporting Files */,
@@ -236,6 +246,8 @@
 				AA7665C916FA53780036E7C4 /* SDKTest.xcdatamodeld in Sources */,
 				AA7665CC16FA53780036E7C4 /* SDKTestIncrementalStore.m in Sources */,
 				AA7665D716FA84F20036E7C4 /* SDKServerManager.m in Sources */,
+				AA7665DA16FA8E380036E7C4 /* RootViewController.m in Sources */,
+				AA7665DD16FA8F210036E7C4 /* DemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
