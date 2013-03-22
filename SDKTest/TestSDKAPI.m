@@ -43,12 +43,20 @@ static TestSDKAPI * testSDK;
 
         // If the URL doesn't contain the access token, an error has occurred.
         if (!accessToken) {
-            //        NSString *error = [params valueForKey:@"error"];
+            //NSString *error = [self.params valueForKey:@"error"];
             
-            //NSString *errorReason = [self.params valueForKey:@"error_reason"];
+            NSString *errorReason = [self.params valueForKey:@"error_reason"];
             
          //   BOOL userDidCancel = [errorReason isEqualToString:@"user_denied"];
        //     [self igDidNotLogin:userDidCancel];
+            
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:errorReason
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            
             return YES;
         }
     
@@ -62,6 +70,9 @@ static TestSDKAPI * testSDK;
     
     NSLog(@"ACCESS TOKEN: %@", credential.accessToken);
 
+    //Store the accessToken on userDefaults
+    [[NSUserDefaults standardUserDefaults] setObject:credential.accessToken forKey:@"accessToken"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
     
     //     [self igDidLogin:accessToken/* expirationDate:expirationDate*/];
         return YES;
