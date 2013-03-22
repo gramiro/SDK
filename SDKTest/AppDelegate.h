@@ -24,6 +24,5 @@
 
 @property (strong, nonatomic) UINavigationController *navigationController;
 
-@property (nonatomic, retain) TestSDKAPI *instagram;
 
 @end

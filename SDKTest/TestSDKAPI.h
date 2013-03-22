@@ -15,7 +15,7 @@
 @property (nonatomic, retain) NSDictionary *params;
 
 -(BOOL)handleOpenURL:(NSURL *)url;
-+(TestSDKAPI *)getInstance;
++(TestSDKAPI *)sharedClient;
 -(void)initInstagram;
 
 @end

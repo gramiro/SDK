@@ -9,18 +9,26 @@
 #import "TestSDKAPI.h"
 #import "AFOAuth2Client.h"
 
-static TestSDKAPI *testSDK;
+static NSString * const kOAuth2BaseURLString = @"https://instagram.com/";
+static NSString * const kClientIDString = @"b5be30367f2445f5b1824e914d1cb3f5";
+static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39";
+
+static TestSDKAPI * testSDK;
 
 @implementation TestSDKAPI
 @synthesize clientID = _clientID;
 @synthesize params = _params;
 
-+(TestSDKAPI *)getInstance{
-    if (!testSDK)
-        testSDK = [[TestSDKAPI alloc] init];
++ (TestSDKAPI *)sharedClient {
+    static TestSDKAPI *_sharedClient = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedClient = [[self alloc]init];
+    });
     
-    return testSDK;
+    return _sharedClient;
 }
+
 
 -(BOOL)handleOpenURL:(NSURL *)url{
         
@@ -68,16 +76,14 @@ static TestSDKAPI *testSDK;
 
 -(void)initInstagram{
     
-    NSURL *url = [NSURL URLWithString:@"https://instagram.com/"];
+    NSURL *url = [NSURL URLWithString:kOAuth2BaseURLString];
     
-    testSDK = [TestSDKAPI clientWithBaseURL:url clientID:@"b5be30367f2445f5b1824e914d1cb3f5" secret:@"c0fbb6630bbe4c078c77e987c39bed39"];
+    testSDK = [TestSDKAPI clientWithBaseURL:url clientID:kClientIDString secret:kClientSecretString];
 
 
-    [testSDK authenticateUsingOAuthWithPath:@"oauth/authorize/" scope:@"basic" redirectURI:[NSString stringWithFormat:@"ig%@://authorize", @"b5be30367f2445f5b1824e914d1cb3f5"] success:^(AFOAuthCredential *credential) {
-        
+    [testSDK authenticateUsingOAuthWithPath:@"oauth/authorize/" scope:@"basic" redirectURI:[NSString stringWithFormat:@"ig%@://authorize", kClientIDString] success:^(AFOAuthCredential *credential) {
         
     } failure:^(NSError *error) {
-        
         
     }];
 
