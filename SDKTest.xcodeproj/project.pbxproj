@@ -24,6 +24,7 @@
 		AA7665D716FA84F20036E7C4 /* SDKServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7665D616FA84F20036E7C4 /* SDKServerManager.m */; };
 		AA7665DA16FA8E380036E7C4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7665D916FA8E380036E7C4 /* RootViewController.m */; };
 		AA7665DD16FA8F210036E7C4 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7665DC16FA8F200036E7C4 /* DemoViewController.m */; };
+		AAE11EBB16FBD24500911B9E /* TestSDKAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE11EBA16FBD24500911B9E /* TestSDKAPI.m */; };
 		E73E210741434606B8E09D14 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 184B4C20E8044617B9E228DB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		AA7665D916FA8E380036E7C4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		AA7665DB16FA8F200036E7C4 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		AA7665DC16FA8F200036E7C4 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		AAE11EB916FBD24500911B9E /* TestSDKAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSDKAPI.h; sourceTree = "<group>"; };
+		AAE11EBA16FBD24500911B9E /* TestSDKAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSDKAPI.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +147,8 @@
 				AA7665CB16FA53780036E7C4 /* SDKTestIncrementalStore.m */,
 				AA7665D516FA84F20036E7C4 /* SDKServerManager.h */,
 				AA7665D616FA84F20036E7C4 /* SDKServerManager.m */,
+				AAE11EB916FBD24500911B9E /* TestSDKAPI.h */,
+				AAE11EBA16FBD24500911B9E /* TestSDKAPI.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 				AA7665D716FA84F20036E7C4 /* SDKServerManager.m in Sources */,
 				AA7665DA16FA8E380036E7C4 /* RootViewController.m in Sources */,
 				AA7665DD16FA8F210036E7C4 /* DemoViewController.m in Sources */,
+				AAE11EBB16FBD24500911B9E /* TestSDKAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
