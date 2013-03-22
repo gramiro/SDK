@@ -14,9 +14,11 @@
 @property (nonatomic, retain) NSString *clientID;
 @property (nonatomic, retain) NSDictionary *params;
 @property (nonatomic, retain) AFOAuthCredential *credential;
+@property (nonatomic, retain) NSArray *scopes;
 
 -(BOOL)handleOpenURL:(NSURL *)url;
 +(TestSDKAPI *)sharedClient;
--(void)initInstagram;
+-(void)authorizeWithScopes:(NSArray *)scopes;
+-(void)logout;
 
 @end
