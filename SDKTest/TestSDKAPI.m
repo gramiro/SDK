@@ -18,6 +18,7 @@ static TestSDKAPI * testSDK;
 @implementation TestSDKAPI
 @synthesize clientID = _clientID;
 @synthesize params = _params;
+@synthesize credential = _credential;
 
 + (TestSDKAPI *)sharedClient {
     static TestSDKAPI *_sharedClient = nil;
@@ -63,15 +64,15 @@ static TestSDKAPI * testSDK;
     NSString *refreshToken = [self.params  valueForKey:@"refresh_token"];
    // refreshToken = refreshToken ? refreshToken : [parameters valueForKey:@"refresh_token"];
     
-    AFOAuthCredential *credential = [AFOAuthCredential credentialWithOAuthToken:[self.params valueForKey:@"access_token"] tokenType:[self.params  valueForKey:@"token_type"]];
-    [credential setRefreshToken:refreshToken expiration:[NSDate dateWithTimeIntervalSinceNow:[[self.params  valueForKey:@"expires_in"] integerValue]]];
+    self.credential = [AFOAuthCredential credentialWithOAuthToken:[self.params valueForKey:@"access_token"] tokenType:[self.params  valueForKey:@"token_type"]];
+    [self.credential setRefreshToken:refreshToken expiration:[NSDate dateWithTimeIntervalSinceNow:[[self.params  valueForKey:@"expires_in"] integerValue]]];
     
-    [self setAuthorizationHeaderWithCredential:credential];
+    [self setAuthorizationHeaderWithCredential:self.credential];
     
-    NSLog(@"ACCESS TOKEN: %@", credential.accessToken);
+    NSLog(@"ACCESS TOKEN: %@", self.credential.accessToken);
 
     //Store the accessToken on userDefaults
-    [[NSUserDefaults standardUserDefaults] setObject:credential.accessToken forKey:@"accessToken"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.credential.accessToken forKey:@"accessToken"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
     
     //     [self igDidLogin:accessToken/* expirationDate:expirationDate*/];

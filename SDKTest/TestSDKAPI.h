@@ -13,6 +13,7 @@
 
 @property (nonatomic, retain) NSString *clientID;
 @property (nonatomic, retain) NSDictionary *params;
+@property (nonatomic, retain) AFOAuthCredential *credential;
 
 -(BOOL)handleOpenURL:(NSURL *)url;
 +(TestSDKAPI *)sharedClient;
