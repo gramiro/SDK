@@ -46,8 +46,7 @@
 }
 
 -(void)performLogin{
-   
-    [[TestSDKAPI sharedClient] initInstagram];
+    [[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"basic", nil]];
 }
 
 
