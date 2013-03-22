@@ -8,9 +8,16 @@
 
 #import "SDKServerManager.h"
 
+@interface SDKServerManager ()
+
+@property (nonatomic, strong) NSObject <InstagramDelegateProtocol> *instaDelegate;
+
+@end
+
 static SDKServerManager *serverManager;
 
 @implementation SDKServerManager
+@synthesize instaDelegate;
 
 + (SDKServerManager *)getServerManager{
     
@@ -19,4 +26,12 @@ static SDKServerManager *serverManager;
     
     return serverManager;
 }
+
+- (void)getFollowersWithDelegate:(NSObject<InstagramDelegateProtocol> *)delegate
+{
+	self.instaDelegate = delegate;
+    
+	//Do all the stuff
+}
+
 @end

@@ -9,7 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "SDKTestAPIClient.h"
 
+@protocol InstagramDelegateProtocol <NSObject>
+
+- (void)updateFollowersArrayWithArray:(NSArray *)array;
+
+@end
+
 @interface SDKServerManager : NSObject
 + (SDKServerManager *)getServerManager;
+
+- (void)getFollowersWithDelegate:(NSObject<InstagramDelegateProtocol> *)delegate;
 
 @end
