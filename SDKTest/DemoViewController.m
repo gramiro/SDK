@@ -133,4 +133,11 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - InstagramDelegateProtocol
+
+-(void)updateFollowersArrayWithArray:(NSArray *)array{
+        self.followersArray = array;
+        [self.tableView reloadData];
+}
+
 @end

@@ -17,6 +17,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize instagram = _instagram;
 
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -27,6 +28,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
   //  UIViewController *viewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    self.instagram = [TestSDKAPI  getInstance];
     
     RootViewController *viewController = [[RootViewController alloc] init];
     
@@ -65,6 +68,14 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [self.instagram handleOpenURL:url];
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self.instagram handleOpenURL:url];
 }
 
 #pragma mark - Core Data
@@ -130,5 +141,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     
     return _persistentStoreCoordinator;
 }
+
+
 
 @end

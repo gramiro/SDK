@@ -10,6 +10,8 @@
 
 #import "SDKTestIncrementalStore.h"
 
+#import "TestSDKAPI.h"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -21,5 +23,7 @@
 - (void)saveContext;
 
 @property (strong, nonatomic) UINavigationController *navigationController;
+
+@property (nonatomic, retain) TestSDKAPI *instagram;
 
 @end

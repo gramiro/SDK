@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SDKServerManager.h"
 
-@interface DemoViewController : UITableViewController
+@interface DemoViewController : UITableViewController <InstagramDelegateProtocol>
 
 @end

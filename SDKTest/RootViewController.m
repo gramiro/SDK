@@ -8,7 +8,8 @@
 
 #import "RootViewController.h"
 #import "DemoViewController.h"
-
+#import "AFOAuth2Client.h"
+#import "TestSDKAPI.h"
 @interface RootViewController ()
 
 @end
@@ -27,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+   
     
     UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [loginButton setTitle:@"Login" forState:UIControlStateNormal];
@@ -45,13 +46,9 @@
 }
 
 -(void)performLogin{
-    
-    DemoViewController *demoVC = [[DemoViewController alloc] initWithStyle:UITableViewStylePlain];
-
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:demoVC];
-    
-    [self presentViewController:navigationController animated:YES completion:nil];
-
+   
+    [[TestSDKAPI getInstance] initInstagram];
 }
+
 
 @end
