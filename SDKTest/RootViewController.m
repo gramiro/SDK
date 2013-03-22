@@ -47,7 +47,7 @@
 
 -(void)performLogin{
    
-    [[TestSDKAPI getInstance] initInstagram];
+    [[TestSDKAPI sharedClient] initInstagram];
 }
 
 
