@@ -40,7 +40,6 @@ static TestSDKAPI * testSDK;
         self.params = [self parseURLParams:query];
         NSString *accessToken = [self.params valueForKey:@"access_token"];
    
-        NSLog(@"ACCESS TOKEN: %@", accessToken);
 
         // If the URL doesn't contain the access token, an error has occurred.
         if (!accessToken) {
@@ -52,8 +51,19 @@ static TestSDKAPI * testSDK;
        //     [self igDidNotLogin:userDidCancel];
             return YES;
         }
-        
-        //     [self igDidLogin:accessToken/* expirationDate:expirationDate*/];
+    
+    NSString *refreshToken = [self.params  valueForKey:@"refresh_token"];
+   // refreshToken = refreshToken ? refreshToken : [parameters valueForKey:@"refresh_token"];
+    
+    AFOAuthCredential *credential = [AFOAuthCredential credentialWithOAuthToken:[self.params valueForKey:@"access_token"] tokenType:[self.params  valueForKey:@"token_type"]];
+    [credential setRefreshToken:refreshToken expiration:[NSDate dateWithTimeIntervalSinceNow:[[self.params  valueForKey:@"expires_in"] integerValue]]];
+    
+    [self setAuthorizationHeaderWithCredential:credential];
+    
+    NSLog(@"ACCESS TOKEN: %@", credential.accessToken);
+
+    
+    //     [self igDidLogin:accessToken/* expirationDate:expirationDate*/];
         return YES;
     
 }
@@ -125,6 +135,10 @@ static TestSDKAPI * testSDK;
     NSLog(@"MutableWeb :%@", mutableRequest.URL);
     
     didOpenOtherApp = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[mutableRequest.URL absoluteString]]];
+    
+    
+        
+      
 }
 
 
