@@ -7,7 +7,7 @@
 //
 
 #import "DemoViewController.h"
-
+#import "TestSDKAPI.h"
 @interface DemoViewController ()
 
 @property (nonatomic, retain) NSArray *followersArray;
@@ -130,6 +130,7 @@
 
 -(void)performLogout{
     
+    [[TestSDKAPI sharedClient] logout];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -88,7 +88,11 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 }
 
 - (void)logout {
+    
     self.credential = nil;
+    [AFOAuthCredential deleteCredentialWithIdentifier:self.serviceProviderIdentifier];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
 }
 
 
