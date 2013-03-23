@@ -26,6 +26,13 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     dispatch_once(&onceToken, ^{
         NSURL *url = [NSURL URLWithString:kOAuth2BaseURLString];
         _sharedClient = [TestSDKAPI clientWithBaseURL:url clientID:kClientIDString secret:kClientSecretString];
+        
+        //get a previously stored credential
+        _sharedClient.credential = [AFOAuthCredential retrieveCredentialWithIdentifier:_sharedClient.serviceProviderIdentifier];
+        if (_sharedClient.credential != nil) {
+            [_sharedClient setAuthorizationHeaderWithCredential:_sharedClient.credential];
+        }
+        
     });
     
     return _sharedClient;
@@ -92,16 +99,30 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     self.credential = nil;
     [AFOAuthCredential deleteCredentialWithIdentifier:self.serviceProviderIdentifier];
     
+    NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray* instagramCookies = [cookies cookiesForURL:[NSURL URLWithString:kOAuth2BaseURLString]];
+    
+    for (NSHTTPCookie* cookie in instagramCookies) {
+        [cookies deleteCookie:cookie];
+    }
+    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
 }
 
 
-- (bool)isLoginRequired {
+- (BOOL)isLoginRequired {
     if (self.credential == nil) {
-        return true;
+        return YES;
     }
-    
-    return false;
+    return NO;
+}
+
+
+- (BOOL)isCredentialExpired {
+    if (self.credential.isExpired) {
+        return YES;
+    }
+    return NO;
 }
 
 
@@ -140,6 +161,8 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     
     self.credential = [AFOAuthCredential credentialWithOAuthToken:[self.params valueForKey:@"access_token"] tokenType:[self.params  valueForKey:@"token_type"]];
     [self.credential setRefreshToken:refreshToken expiration:[NSDate dateWithTimeIntervalSinceNow:[[self.params  valueForKey:@"expires_in"] integerValue]]];
+    
+    [AFOAuthCredential storeCredential:self.credential withIdentifier:self.serviceProviderIdentifier];
     
     [self setAuthorizationHeaderWithCredential:self.credential];
     

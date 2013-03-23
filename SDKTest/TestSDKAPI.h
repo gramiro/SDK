@@ -20,5 +20,7 @@
 +(TestSDKAPI *)sharedClient;
 -(void)authorizeWithScopes:(NSArray *)scopes;
 -(void)logout;
+-(BOOL)isLoginRequired;
+-(BOOL)isCredentialExpired;
 
 @end
