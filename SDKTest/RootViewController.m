@@ -57,8 +57,12 @@
     } else
     {
     [[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"basic", nil]];
+    [[TestSDKAPI sharedClient] setLoginDelegate:self];
     }
 }
 
+-(void)performLoginFromHandle{
+    [self performLogin];
+}
 
 @end

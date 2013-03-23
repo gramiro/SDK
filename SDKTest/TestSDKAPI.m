@@ -19,6 +19,7 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 @synthesize params = _params;
 @synthesize credential = _credential;
 @synthesize scopes = _scopes;
+@synthesize loginDelegate = _loginDelegate;
 
 + (TestSDKAPI *)sharedClient {
     static TestSDKAPI *_sharedClient = nil;
@@ -171,6 +172,8 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     //Store the accessToken on userDefaults
     [[NSUserDefaults standardUserDefaults] setObject:self.credential.accessToken forKey:@"accessToken"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [_loginDelegate performLoginFromHandle];
     
     //     [self igDidLogin:accessToken/* expirationDate:expirationDate*/];
     return YES;

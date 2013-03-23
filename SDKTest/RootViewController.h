@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface RootViewController : UIViewController
+#import "TestSDKAPI.h"
+@interface RootViewController : UIViewController <HandleURLLoginDelegate>
 
 @end
