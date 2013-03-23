@@ -29,7 +29,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[TestSDKAPI sharedClient] setFollowersDelegate:self];
 
+    [[TestSDKAPI sharedClient] requestData];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -55,9 +58,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    //  return [followersArray count];
-    return 10;
+    if(followersArray.count > 0)
+      return [followersArray count];
+    else
+        return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -70,8 +74,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:CellIdentifier];
     }
+    if (followersArray.count > 0) {
+        cell.textLabel.text = [[self.followersArray objectAtIndex:indexPath.row] objectForKey:@"username"];
+    } else
+    {
+        cell.textLabel.text = @"You don't have followers";
+    }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Follower %i", indexPath.row];
     
     return cell;
 }
@@ -141,4 +150,13 @@
         [self.tableView reloadData];
 }
 
+-(void)loadFollowersWithArray:(NSDictionary *)dict{
+    
+    
+    self.followersArray = [dict objectForKey:@"data"];
+    NSLog(@"Array!: %@", self.followersArray);
+
+    [self.tableView reloadData];
+
+}
 @end

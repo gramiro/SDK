@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "AFOAuth2Client.h"
 
+@protocol FollowersDelegate <NSObject>
+
+-(void)loadFollowersWithArray:(NSDictionary *)dict;
+
+
+@end
 @protocol HandleURLLoginDelegate <NSObject>
 
 -(void)performLoginFromHandle;
@@ -22,6 +28,7 @@
 @property (nonatomic, retain) AFOAuthCredential *credential;
 @property (nonatomic, retain) NSArray *scopes;
 @property (nonatomic, strong) NSObject <HandleURLLoginDelegate> *loginDelegate;
+@property (nonatomic, strong) NSObject <FollowersDelegate> *followersDelegate;
 
 -(BOOL)handleOpenURL:(NSURL *)url;
 +(TestSDKAPI *)sharedClient;
@@ -29,5 +36,5 @@
 -(void)logout;
 -(BOOL)isLoginRequired;
 -(BOOL)isCredentialExpired;
-
+-(void)requestData;
 @end

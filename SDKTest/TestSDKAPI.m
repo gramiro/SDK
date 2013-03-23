@@ -10,6 +10,7 @@
 #import "AFOAuth2Client.h"
 
 static NSString * const kOAuth2BaseURLString = @"https://instagram.com/";
+static NSString * const kServerAPIURL = @"https://api.instagram.com/v1/";
 static NSString * const kClientIDString = @"b5be30367f2445f5b1824e914d1cb3f5";
 static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39";
 
@@ -20,6 +21,7 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 @synthesize credential = _credential;
 @synthesize scopes = _scopes;
 @synthesize loginDelegate = _loginDelegate;
+@synthesize followersDelegate = _followersDelegate;
 
 + (TestSDKAPI *)sharedClient {
     static TestSDKAPI *_sharedClient = nil;
@@ -66,6 +68,8 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     [mutableParameters setValue:scope forKey:@"scope"];
     [mutableParameters setValue:uri forKey:@"redirect_uri"];
     [mutableParameters setValue:@"token" forKey:@"response_type"];
+    [mutableParameters setValue:@"authorization_code" forKey:@"grant_type"];
+    [mutableParameters setValue:kClientSecretString forKey:@"client_secret"];
     NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
     
     [self authenticateUsingOAuthWithPath:path parameters:parameters success:success failure:failure];
@@ -133,6 +137,7 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     if (!query) {
         query = [url query];
     }
+    NSLog(@"URL FRAGMENT: %@", [url fragment]);
     
     self.params = [self parseURLParams:query];
     NSString *accessToken = [self.params valueForKey:@"access_token"];
@@ -196,5 +201,37 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     return params;
 }
 
+-(void)requestData{
+    
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    
+    NSString *path =  [NSString stringWithFormat:@"%@users/self/followed-by", kServerAPIURL];
+    
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        [_followersDelegate loadFollowersWithArray:(NSDictionary *)responseObject];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+}
+
+- (void)getPath:(NSString *)path
+     parameters:(NSDictionary *)parameters
+        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+	NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
+    [self enqueueHTTPRequestOperation:operation];
+}
 
 @end

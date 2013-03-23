@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TestSDKAPI.h"
 #import "SDKServerManager.h"
 
-@interface DemoViewController : UITableViewController <InstagramDelegateProtocol>
+@interface DemoViewController : UITableViewController <InstagramDelegateProtocol, FollowersDelegate>
 
 @end
