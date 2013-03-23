@@ -36,6 +36,10 @@
     [loginButton setFrame:CGRectMake(self.view.bounds.size.width/2 - 50, self.view.bounds.size.height/2 - 20, 100, 40)];
     
     [self.view addSubview:loginButton];
+    
+    [self performSelector:@selector(LoginWithNoAnimation) withObject:nil afterDelay:0.1f];
+    
+    
 	// Do any additional setup after loading the view.
 }
 
@@ -63,6 +67,16 @@
 
 -(void)performLoginFromHandle{
     [self performLogin];
+}
+
+-(void)LoginWithNoAnimation{
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]) {
+        DemoViewController *demoVC = [[DemoViewController alloc] init];
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:demoVC];
+        
+        [self presentModalViewController:navController animated:NO];
+    }
 }
 
 @end
