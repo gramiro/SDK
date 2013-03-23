@@ -46,7 +46,18 @@
 }
 
 -(void)performLogin{
+    
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]) {
+        DemoViewController *demoVC = [[DemoViewController alloc] init];
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:demoVC];
+        
+        [self presentModalViewController:navController animated:YES];
+    } else
+    {
     [[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"basic", nil]];
+    }
 }
 
 
