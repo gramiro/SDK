@@ -47,15 +47,10 @@
 -(void)getAuthenticatedUserLikedMediaWithParameters:(NSDictionary*)params AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 -(void)searchUserWithQuery:(NSString*)query AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 
-<<<<<<< HEAD
 //RELATIONSHIP ENDPOINT
 -(void)getFollowedByWithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate;
 -(void)getFollowsWithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate;
 -(void)postRelationship:(NSString *)action WithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate;
-
-=======
-//RELATIONSHIPS ENDPOINT
 -(void)getRequestedByWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 -(void)getRelationshipWithUserID:(NSString*)userID AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
->>>>>>> origin/master
 @end

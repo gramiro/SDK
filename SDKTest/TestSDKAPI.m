@@ -311,7 +311,6 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 
 //RELATIONSHIP ENDPOINT
 
-<<<<<<< HEAD
 -(void)getFollowedByWithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate {
     
     NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
@@ -335,28 +334,18 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 
 -(void)getFollowsWithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate {
     
-=======
--(void)getRequestedByWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
->>>>>>> origin/master
     NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
     [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
     NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
     
-<<<<<<< HEAD
     NSString *path =  [NSString stringWithFormat:@"%@users/%@/follows", kServerAPIURL, userID];
-=======
-    NSString *path =  [NSString stringWithFormat:@"%@users/self/requested-by", kServerAPIURL];
->>>>>>> origin/master
-    
+
     [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"REQUESTED-BY REQUEST");
         NSLog(@"Response object: %@", responseObject);
-<<<<<<< HEAD
         [delegate loadFollowsWithArray:[responseObject objectForKey:@"data"]];
-=======
-        //Complete with delegate call
->>>>>>> origin/master
+
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

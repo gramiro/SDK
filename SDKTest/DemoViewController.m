@@ -51,11 +51,8 @@
     
     //[[TestSDKAPI sharedClient] getAuthenticatedUserLikedMediaWithParameters:params AndWithDelegate:self];
     
-<<<<<<< HEAD
   //  [[TestSDKAPI sharedClient] searchUserWithQuery:@"Red Bull" AndWithDelegate:self];
-=======
-    //[[TestSDKAPI sharedClient] searchUserWithQuery:@"Red Bull" AndWithDelegate:self];
->>>>>>> origin/master
+
     
     //[[TestSDKAPI sharedClient] getRequestedByWithDelegate:self];
     
