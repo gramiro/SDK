@@ -10,12 +10,12 @@
 #import "TestSDKAPI.h"
 @interface DemoViewController ()
 
-@property (nonatomic, retain) NSArray *followersArray;
+@property (nonatomic, retain) NSArray *followedByArray;
 
 @end
 
 @implementation DemoViewController
-@synthesize followersArray;
+@synthesize followedByArray;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,13 +30,18 @@
 {
     [super viewDidLoad];
     
+   // [[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"relationships", nil]];
+    
     //TEST BY COMMENT-UNCOMMENT THE FOLLOWING LINES
     
-    //[[TestSDKAPI sharedClient] getFollowersWithDelegate:self];
+    //[[TestSDKAPI sharedClient] getFollowedByWithUserId:@"self" Delegate:self];
+    
+   // [[TestSDKAPI sharedClient] getFollowsWithUserId:@"self" Delegate:self];
+    
     
     //[[TestSDKAPI sharedClient] getUserInfoWithUserID:@"self" AndWithDelegate:self];
     
-    
+   // [[TestSDKAPI sharedClient] postRelationship:@"follow" WithUserId:@"224680885" Delegate:self];
     
     //NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"2",@"count", nil];
     
@@ -46,7 +51,7 @@
     
     //[[TestSDKAPI sharedClient] getAuthenticatedUserLikedMediaWithParameters:params AndWithDelegate:self];
     
-    [[TestSDKAPI sharedClient] searchUserWithQuery:@"Red Bull" AndWithDelegate:self];
+  //  [[TestSDKAPI sharedClient] searchUserWithQuery:@"Red Bull" AndWithDelegate:self];
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -74,8 +79,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(followersArray.count > 0)
-      return [followersArray count];
+    if(followedByArray.count > 0)
+      return [followedByArray count];
     else
         return 1;
 }
@@ -90,8 +95,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:CellIdentifier];
     }
-    if (followersArray.count > 0) {
-        cell.textLabel.text = [[self.followersArray objectAtIndex:indexPath.row] objectForKey:@"username"];
+    if (followedByArray.count > 0) {
+        cell.textLabel.text = [[self.followedByArray objectAtIndex:indexPath.row] objectForKey:@"username"];
     } else
     {
         cell.textLabel.text = @"You don't have followers";
@@ -160,10 +165,14 @@
 
 #pragma mark - InstagramRequestsDelegate
 
--(void)loadFollowersWithArray:(NSArray *)array {
-    self.followersArray = array;
-    NSLog(@"Array!: %@", self.followersArray);
+-(void)loadFollowedByWithArray:(NSArray *)array {
+    self.followedByArray = array;
+    NSLog(@"Array!: %@", self.followedByArray);
     [self.tableView reloadData];
 
+}
+
+-(void)loadFollowsWithArray:(NSArray *)array{
+    
 }
 @end

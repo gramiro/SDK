@@ -11,7 +11,8 @@
 
 @protocol InstagramRequestsDelegate <NSObject>
 
--(void)loadFollowersWithArray:(NSArray *)array;
+-(void)loadFollowsWithArray:(NSArray *)array;
+-(void)loadFollowedByWithArray:(NSArray *)array;
 
 @end
 
@@ -47,6 +48,8 @@
 -(void)searchUserWithQuery:(NSString*)query AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 
 //RELATIONSHIP ENDPOINT
--(void)getFollowersWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
+-(void)getFollowedByWithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+-(void)getFollowsWithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+-(void)postRelationship:(NSString *)action WithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate;
 
 @end

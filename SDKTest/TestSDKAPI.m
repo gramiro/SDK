@@ -310,19 +310,20 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 
 
 //RELATIONSHIP ENDPOINT
--(void)getFollowersWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+
+-(void)getFollowedByWithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate {
     
     NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
     [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
     NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
     
-    NSString *path =  [NSString stringWithFormat:@"%@users/self/followed-by", kServerAPIURL];
+    NSString *path =  [NSString stringWithFormat:@"%@users/%@/followed-by", kServerAPIURL, userID];
     
     [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"AUTHENTICATED USER FOLLOWERS REQUEST");
+        NSLog(@"AUTHENTICATED USER FOLLOWED-BY REQUEST");
         NSLog(@"Response object: %@", responseObject);
-        [delegate loadFollowersWithArray:[responseObject objectForKey:@"data"]];
+        [delegate loadFollowedByWithArray:[responseObject objectForKey:@"data"]];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -331,6 +332,51 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     
 }
 
+-(void)getFollowsWithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@users/%@/follows", kServerAPIURL, userID];
+    
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"AUTHENTICATED USER FOLLOWERS REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        [delegate loadFollowsWithArray:[responseObject objectForKey:@"data"]];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+}
+
+
+
+//POST
+
+-(void)postRelationship:(NSString *)action WithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    
+    
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    [mutableParameters setValue:action forKey:@"action"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@users/%@/relationship", kServerAPIURL, userID];
+    
+    [self postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"AUTHENTICATED USER POST RELATIONSHIP REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+}
 
 //helper
 - (void)getPath:(NSString *)path
@@ -344,5 +390,18 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
     [self enqueueHTTPRequestOperation:operation];
 }
+
+- (void)postPath:(NSString *)path
+     parameters:(NSDictionary *)parameters
+        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:path parameters:parameters];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
+    [self enqueueHTTPRequestOperation:operation];
+}
+
 
 @end
