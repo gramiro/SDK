@@ -53,6 +53,13 @@
     
   //  [[TestSDKAPI sharedClient] searchUserWithQuery:@"Red Bull" AndWithDelegate:self];
 
+  /* NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"48.858844", @"lat", @"2.294351", @"lng", @"5000", @"distance",nil];
+    
+    [[TestSDKAPI sharedClient] getMediaSearchWithParams:params AndWithDelegate:self];*/
+    
+    //[[TestSDKAPI sharedClient] getMediaWithMediaID:@"3" AndWithDelegate:self];
+   
+    //[[TestSDKAPI sharedClient] getPopularMediaWithDelegate:self];
     
     //[[TestSDKAPI sharedClient] getRequestedByWithDelegate:self];
     

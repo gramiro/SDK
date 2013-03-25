@@ -53,4 +53,11 @@
 -(void)postRelationship:(NSString *)action WithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate;
 -(void)getRequestedByWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 -(void)getRelationshipWithUserID:(NSString*)userID AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
+
+
+//MEDIA ENDPOINT
+-(void)getMediaWithMediaID:(NSString *)mediaID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+-(void)getMediaSearchWithParams:(NSDictionary *)mediaParams AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+-(void)getPopularMediaWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+
 @end
