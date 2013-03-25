@@ -21,7 +21,8 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 @synthesize credential = _credential;
 @synthesize scopes = _scopes;
 @synthesize loginDelegate = _loginDelegate;
-@synthesize followersDelegate = _followersDelegate;
+
+#pragma mark - Singleton creation
 
 + (TestSDKAPI *)sharedClient {
     static TestSDKAPI *_sharedClient = nil;
@@ -42,6 +43,8 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 }
 
 
+#pragma mark - INSTAGRAM Login/Logout
+//Login
 - (void)authorizeWithScopes:(NSArray *)scopes{
     
     self.scopes = scopes;
@@ -56,6 +59,7 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     }];
     
 }
+
 
 - (void)authenticateUsingOAuthWithPath:(NSString *)path
                                  scope:(NSString *)scope
@@ -74,7 +78,6 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     
     [self authenticateUsingOAuthWithPath:path parameters:parameters success:success failure:failure];
 }
-
 
 - (void)authenticateUsingOAuthWithPath:(NSString *)path
                             parameters:(NSDictionary *)parameters
@@ -99,6 +102,7 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     
 }
 
+//Logout
 - (void)logout {
     
     self.credential = nil;
@@ -114,7 +118,7 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
 }
 
-
+//helpers
 - (BOOL)isLoginRequired {
     if (self.credential == nil) {
         return YES;
@@ -201,20 +205,23 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     return params;
 }
 
--(void)requestData{
-    
+
+
+#pragma mark - INSTAGRAM API REQUESTS
+//USER ENDPOINT
+-(void)getUserInfoWithUserID:(NSString *)userID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
     NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
     [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
     NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
     
-    
-    NSString *path =  [NSString stringWithFormat:@"%@users/self/followed-by", kServerAPIURL];
+    NSString *path =  [NSString stringWithFormat:@"%@users/%@", kServerAPIURL, userID];
     
     [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        NSLog(@"USER INFO REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        //Complete with delegate call
         
-        [_followersDelegate loadFollowersWithArray:(NSDictionary *)responseObject];
-
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
@@ -222,6 +229,110 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     
 }
 
+-(void)getAuthenticatedUserFeedWithParameters:(NSDictionary *)params AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionaryWithDictionary:params];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@users/self/feed", kServerAPIURL];
+    
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"AUTHENTICATED USER FEED REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        //Complete with delegate call
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+}
+
+-(void)getUserMediaWithUserID:(NSString *)userID Parameters:(NSDictionary *)params AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionaryWithDictionary:params];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@users/%@/media/recent", kServerAPIURL, userID];
+    
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"USER MEDIA REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        //Complete with delegate call
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+
+}
+
+-(void)getAuthenticatedUserLikedMediaWithParameters:(NSDictionary *)params AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionaryWithDictionary:params];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@users/self/media/liked", kServerAPIURL];
+    
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"AUTHENTICATED USER LIKED MEDIA REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        //Complete with delegate call
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+}
+
+-(void)searchUserWithQuery:(NSString *)query AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    [mutableParameters setValue:query forKey:@"q"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@users/search", kServerAPIURL];
+    
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"USER SEARCH REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        //Complete with delegate call
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+}
+
+
+//RELATIONSHIP ENDPOINT
+-(void)getFollowersWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@users/self/followed-by", kServerAPIURL];
+    
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"AUTHENTICATED USER FOLLOWERS REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        [delegate loadFollowersWithArray:[responseObject objectForKey:@"data"]];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+}
+
+
+//helper
 - (void)getPath:(NSString *)path
      parameters:(NSDictionary *)parameters
         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success

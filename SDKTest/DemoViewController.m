@@ -30,9 +30,25 @@
 {
     [super viewDidLoad];
     
-    [[TestSDKAPI sharedClient] setFollowersDelegate:self];
-
-    [[TestSDKAPI sharedClient] requestData];
+    //TEST BY COMMENT-UNCOMMENT THE FOLLOWING LINES
+    
+    //[[TestSDKAPI sharedClient] getFollowersWithDelegate:self];
+    
+    //[[TestSDKAPI sharedClient] getUserInfoWithUserID:@"self" AndWithDelegate:self];
+    
+    
+    
+    //NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"2",@"count", nil];
+    
+    //[[TestSDKAPI sharedClient] getAuthenticatedUserFeedWithParameters:params AndWithDelegate:self];
+    
+    //[[TestSDKAPI sharedClient] getUserMediaWithUserID:@"1026092" Parameters:params AndWithDelegate:self];
+    
+    //[[TestSDKAPI sharedClient] getAuthenticatedUserLikedMediaWithParameters:params AndWithDelegate:self];
+    
+    [[TestSDKAPI sharedClient] searchUserWithQuery:@"Red Bull" AndWithDelegate:self];
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -138,24 +154,15 @@
 }
 
 -(void)performLogout{
-    
     [[TestSDKAPI sharedClient] logout];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - InstagramDelegateProtocol
+#pragma mark - InstagramRequestsDelegate
 
--(void)updateFollowersArrayWithArray:(NSArray *)array{
-        self.followersArray = array;
-        [self.tableView reloadData];
-}
-
--(void)loadFollowersWithArray:(NSDictionary *)dict{
-    
-    
-    self.followersArray = [dict objectForKey:@"data"];
+-(void)loadFollowersWithArray:(NSArray *)array {
+    self.followersArray = array;
     NSLog(@"Array!: %@", self.followersArray);
-
     [self.tableView reloadData];
 
 }
