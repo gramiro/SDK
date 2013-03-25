@@ -10,6 +10,6 @@
 #import "TestSDKAPI.h"
 #import "SDKServerManager.h"
 
-@interface DemoViewController : UITableViewController <InstagramDelegateProtocol, FollowersDelegate>
+@interface DemoViewController : UITableViewController <InstagramRequestsDelegate>
 
 @end
