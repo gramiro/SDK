@@ -46,8 +46,11 @@
     
     //[[TestSDKAPI sharedClient] getAuthenticatedUserLikedMediaWithParameters:params AndWithDelegate:self];
     
-    [[TestSDKAPI sharedClient] searchUserWithQuery:@"Red Bull" AndWithDelegate:self];
+    //[[TestSDKAPI sharedClient] searchUserWithQuery:@"Red Bull" AndWithDelegate:self];
     
+    //[[TestSDKAPI sharedClient] getRequestedByWithDelegate:self];
+    
+    //[[TestSDKAPI sharedClient] getRelationshipWithUserID:@"38736160" AndWithDelegate:self];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
