@@ -39,14 +39,14 @@
 -(BOOL)isCredentialExpired;
 
 
-//USER ENDPOINT
+//USERS ENDPOINT
 -(void)getUserInfoWithUserID:(NSString*)userID AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 -(void)getAuthenticatedUserFeedWithParameters:(NSDictionary*)params AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 -(void)getUserMediaWithUserID:(NSString*)userID Parameters:(NSDictionary*)params AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 -(void)getAuthenticatedUserLikedMediaWithParameters:(NSDictionary*)params AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 -(void)searchUserWithQuery:(NSString*)query AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 
-//RELATIONSHIP ENDPOINT
--(void)getFollowersWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
-
+//RELATIONSHIPS ENDPOINT
+-(void)getRequestedByWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
+-(void)getRelationshipWithUserID:(NSString*)userID AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 @end
