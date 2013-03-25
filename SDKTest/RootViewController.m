@@ -60,7 +60,7 @@
         [self presentModalViewController:navController animated:YES];
     } else
     {
-    [[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"basic", nil]];
+    [[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"basic", @"relationships", nil]];
     [[TestSDKAPI sharedClient] setLoginDelegate:self];
     }
 }

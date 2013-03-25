@@ -310,27 +310,45 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 
 
 //RELATIONSHIP ENDPOINT
--(void)getFollowersWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
-    
+
+-(void)getRequestedByWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
     NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
     [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
     NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
     
-    NSString *path =  [NSString stringWithFormat:@"%@users/self/followed-by", kServerAPIURL];
+    NSString *path =  [NSString stringWithFormat:@"%@users/self/requested-by", kServerAPIURL];
     
     [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"AUTHENTICATED USER FOLLOWERS REQUEST");
+        NSLog(@"REQUESTED-BY REQUEST");
         NSLog(@"Response object: %@", responseObject);
-        [delegate loadFollowersWithArray:[responseObject objectForKey:@"data"]];
+        //Complete with delegate call
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
     }];
-    
 }
 
+-(void)getRelationshipWithUserID:(NSString *)userID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@users/%@/relationship", kServerAPIURL, userID];
+    
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"RELATIONSHIP GET REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        //Complete with delegate call
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+
+}
 
 //helper
 - (void)getPath:(NSString *)path
