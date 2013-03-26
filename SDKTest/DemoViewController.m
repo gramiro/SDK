@@ -30,7 +30,7 @@
 {
     [super viewDidLoad];
     
-   // [[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"relationships", nil]];
+    //[[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"relationships", nil]];
     
     //TEST BY COMMENT-UNCOMMENT THE FOLLOWING LINES
     
@@ -43,11 +43,11 @@
     
    // [[TestSDKAPI sharedClient] postRelationship:@"follow" WithUserId:@"224680885" Delegate:self];
     
-    //NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"2",@"count", nil];
+  //  NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"2",@"count", nil];
     
     //[[TestSDKAPI sharedClient] getAuthenticatedUserFeedWithParameters:params AndWithDelegate:self];
     
-    //[[TestSDKAPI sharedClient] getUserMediaWithUserID:@"1026092" Parameters:params AndWithDelegate:self];
+   // [[TestSDKAPI sharedClient] getUserMediaWithUserID:@"self" Parameters:params AndWithDelegate:self];
     
     //[[TestSDKAPI sharedClient] getAuthenticatedUserLikedMediaWithParameters:params AndWithDelegate:self];
     
@@ -57,8 +57,22 @@
     
     [[TestSDKAPI sharedClient] getMediaSearchWithParams:params AndWithDelegate:self];*/
     
-    //[[TestSDKAPI sharedClient] getMediaWithMediaID:@"3" AndWithDelegate:self];
+  //  [[TestSDKAPI sharedClient] getMediaWithMediaID:@"392743925499176680_38736160" AndWithDelegate:self];
+    
+   // [[TestSDKAPI sharedClient] getLikesOfMediaId:@"392743925499176680_38736160" AndWithDelegate:self];
    
+   // [[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"likes", nil]];
+     
+   // [[TestSDKAPI sharedClient] postLikeOnMediaWithMediaId:@"392743925499176680_38736160" AndWithDelegate:self];
+    
+   // [[TestSDKAPI sharedClient] removeLikeOnMediaWithMediaId:@"392743925499176680_38736160" AndWithDelegate:self];
+    
+   // [[TestSDKAPI sharedClient] getTagInfoWithTagName:@"boring" AndWithDelegate:self];
+    
+    //[[TestSDKAPI sharedClient] getSearchTagsWithTagName:@"snowy" AndWithDelegate:self];
+    
+  //  [[TestSDKAPI sharedClient] getRecentTags:@"snowly" WithParams:nil AndWithDelegate:self];
+    
     //[[TestSDKAPI sharedClient] getPopularMediaWithDelegate:self];
     
     //[[TestSDKAPI sharedClient] getRequestedByWithDelegate:self];
