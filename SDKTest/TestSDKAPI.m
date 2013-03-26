@@ -210,7 +210,7 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 
 
 #pragma mark - INSTAGRAM API REQUESTS
-//USER ENDPOINT
+//USERS ENDPOINT
 -(void)getUserInfoWithUserID:(NSString *)userID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
     NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
     [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
@@ -441,20 +441,9 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 }
 
 -(void)getMediaSearchWithParams:(NSDictionary *)mediaParams AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
-    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionaryWithDictionary:mediaParams];
     [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
-    if ([mediaParams objectForKey:@"lat"])
-        [mutableParameters setValue:[mediaParams objectForKey:@"lat"] forKey:@"lat"];
-    if ([mediaParams objectForKey:@"min_timestamp"])
-        [mutableParameters setValue:[mediaParams objectForKey:@"min_timestamp"] forKey:@"min_timestamp"];
-    if ([mediaParams objectForKey:@"lng"])
-        [mutableParameters setValue:[mediaParams objectForKey:@"lng"] forKey:@"lng"];
-    if ([mediaParams objectForKey:@"max_timestamp"])
-        [mutableParameters setValue:[mediaParams objectForKey:@"max_timestamp"] forKey:@"max_timestamp"];
-    if ([mediaParams objectForKey:@"distance"])
-        [mutableParameters setValue:[mediaParams objectForKey:@"distance"] forKey:@"distance"];
 
-    
     NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
     
     NSString *path =  [NSString stringWithFormat:@"%@media/search", kServerAPIURL];
@@ -471,6 +460,28 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     }];
 
 }
+
+-(void)getPopularMediaWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@media/popular", kServerAPIURL];
+    
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"POPULAR MEDIA GET REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        //Complete with delegate call
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+}
+
+
 //COMMENTS ENDPOINT
 -(void)getCommentsWithMediaID:(NSString *)mediaID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
     NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
@@ -482,48 +493,6 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"MEDIA COMMENTS GET REQUEST");
-        NSLog(@"Response object: %@", responseObject);
-        //Complete with delegate call
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-    }];
-    
-}
-
--(void)getPopularMediaWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
-    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
-    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
-    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
-    
-    NSString *path =  [NSString stringWithFormat:@"%@media/popular", kServerAPIURL];
-    
-    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"MEDIA POPULAR GET REQUEST");
-        NSLog(@"Response object: %@", responseObject);
-        //Complete with delegate call
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-    }];
-    
-}
-
-//LIKES ENDPOINT
-
--(void)getLikesOfMediaId:(NSString *)mediaID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
-    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
-    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
-    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
-    
-    NSString *path =  [NSString stringWithFormat:@"%@media/%@/likes", kServerAPIURL, mediaID];
-    
-    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"LIKES MEDIA GET REQUEST");
         NSLog(@"Response object: %@", responseObject);
         //Complete with delegate call
         
@@ -554,9 +523,52 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     
 }
 
+-(void)deleteCommentWithCommentID:(NSString *)commentID MediaID:(NSString *)mediaID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    [mutableParameters setValue:@"DELETE" forKey:@"_method"]; //SIMULATE A DELETE METHOD ON INSTAGRAM
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@media/%@/comments/%@", kServerAPIURL, mediaID, commentID];
+    
+    [self postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"DELETE COMMENT REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        //Complete with delegate call
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+    
+}
+
+
+//LIKES ENDPOINT
+
+-(void)getLikesOfMediaId:(NSString *)mediaID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@media/%@/likes", kServerAPIURL, mediaID];
+    
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"LIKES MEDIA GET REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        //Complete with delegate call
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+}
+
+
 -(void)postLikeOnMediaWithMediaId:(NSString *)mediaID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
-    
-    
     NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
     [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
     NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
@@ -597,26 +609,6 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 
 }
 
--(void)deleteCommentWithCommentID:(NSString *)commentID MediaID:(NSString *)mediaID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
-    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
-    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
-    [mutableParameters setValue:@"DELETE" forKey:@"_method"]; //SIMULATE A DELETE METHOD ON INSTAGRAM
-    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
-    
-    NSString *path =  [NSString stringWithFormat:@"%@media/%@/comments/%@", kServerAPIURL, mediaID, commentID];
-    
-    [self postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"DELETE COMMENT REQUEST");
-        NSLog(@"Response object: %@", responseObject);
-        //Complete with delegate call
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-    }];
-    
-
-}
 
 //TAGS ENDPOINT
 -(void)getTagInfoWithTagName:(NSString *)tagString AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
@@ -640,14 +632,8 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
 }
 
 -(void)getRecentTags:(NSString *)tagID WithParams:(NSDictionary *)tagParams AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
-    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionaryWithDictionary:tagParams];
     [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
-    
-    if ([tagParams objectForKey:@"min_id"])
-        [mutableParameters setValue:[tagParams objectForKey:@"min_id"] forKey:@"min_id"];
-    if ([tagParams objectForKey:@"max_id"])
-        [mutableParameters setValue:[tagParams objectForKey:@"max_id"] forKey:@"max_id"];
-    
     NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
     
     NSString *path =  [NSString stringWithFormat:@"%@tags/%@/media/recent", kServerAPIURL, tagID];
@@ -663,6 +649,26 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
         
     }];
 
+}
+
+-(void)getSearchTagsWithTagName:(NSString *)tagString AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
+    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    [mutableParameters setValue:tagString forKey:@"q"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@/tags/search", kServerAPIURL];
+    
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"TAGS SEARCH GET REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        //Complete with delegate call
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
 }
 
 
@@ -687,25 +693,6 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     
 }
 
--(void)getSearchTagsWithTagName:(NSString *)tagString AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
-    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
-    [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
-    [mutableParameters setValue:tagString forKey:@"q"];
-    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
-    
-    NSString *path =  [NSString stringWithFormat:@"%@/tags/search", kServerAPIURL];
-    
-    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"TAGS SEARCH GET REQUEST");
-        NSLog(@"Response object: %@", responseObject);
-        //Complete with delegate call
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-    }];
-}
 
 -(void)getLocationRecentMediaWithLocationID:(NSString *)locationID Parameters:(NSDictionary *)params AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
     NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
@@ -727,34 +714,6 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     
 }
 
-//GEO ENDPOINT
-
--(void)getGeoWithGeoId:(NSString *)geoId WithParams:(NSDictionary *)geoParams AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
-    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
-   // [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
-    [mutableParameters setValue:self.clientID forKey:@"client_id"];
-    
-    if ([geoParams objectForKey:@"count"])
-        [mutableParameters setValue:[geoParams objectForKey:@"count"] forKey:@"count"];
-    if ([geoParams objectForKey:@"min_id"])
-        [mutableParameters setValue:[geoParams objectForKey:@"min_id"] forKey:@"min_id"];
-    
-    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
-    
-    NSString *path =  [NSString stringWithFormat:@"%@geographies/%@/media/recent", kServerAPIURL, geoId];
-    
-    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"GEO GET REQUEST");
-        NSLog(@"Response object: %@", responseObject);
-        //Complete with delegate call
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-    }];
-}
-
 -(void)searchLocationWithParameters:(NSDictionary *)params AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
     NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionaryWithDictionary:params];
     [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
@@ -774,6 +733,30 @@ static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39
     }];
     
 }
+
+
+//GEOGRAPHIES ENDPOINT
+
+-(void)getGeoWithGeoId:(NSString *)geoId WithParams:(NSDictionary *)geoParams AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate {
+    NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionaryWithDictionary:geoParams];
+   // [mutableParameters setValue:self.credential.accessToken forKey:@"access_token"];
+    [mutableParameters setValue:self.clientID forKey:@"client_id"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
+    NSString *path =  [NSString stringWithFormat:@"%@geographies/%@/media/recent", kServerAPIURL, geoId];
+    
+    [self getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"GEO GET REQUEST");
+        NSLog(@"Response object: %@", responseObject);
+        //Complete with delegate call
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+}
+
 
 //helpers
 - (void)getPath:(NSString *)path
