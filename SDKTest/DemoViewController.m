@@ -30,24 +30,24 @@
 {
     [super viewDidLoad];
     
-   // [[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"relationships", nil]];
+    //[[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects: @"basic", @"relationships", @"comments", nil]];
     
     //TEST BY COMMENT-UNCOMMENT THE FOLLOWING LINES
     
-    //[[TestSDKAPI sharedClient] getFollowedByWithUserId:@"self" Delegate:self];
+    //[[TestSDKAPI sharedClient] getFollowedByWithUserId:@"self" AndWithDelegate:self];
     
-   // [[TestSDKAPI sharedClient] getFollowsWithUserId:@"self" Delegate:self];
+   // [[TestSDKAPI sharedClient] getFollowsWithUserId:@"self" AndWithDelegate:self];
     
     
     //[[TestSDKAPI sharedClient] getUserInfoWithUserID:@"self" AndWithDelegate:self];
     
-   // [[TestSDKAPI sharedClient] postRelationship:@"follow" WithUserId:@"224680885" Delegate:self];
+   // [[TestSDKAPI sharedClient] postRelationshipWithAction:@"follow" UserId:@"224680885" AndWithDelegate:self];
     
-    //NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"2",@"count", nil];
+    //NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"4",@"count", nil];
     
     //[[TestSDKAPI sharedClient] getAuthenticatedUserFeedWithParameters:params AndWithDelegate:self];
     
-    //[[TestSDKAPI sharedClient] getUserMediaWithUserID:@"1026092" Parameters:params AndWithDelegate:self];
+    //[[TestSDKAPI sharedClient] getUserMediaWithUserID:@"31628480" Parameters:params AndWithDelegate:self];
     
     //[[TestSDKAPI sharedClient] getAuthenticatedUserLikedMediaWithParameters:params AndWithDelegate:self];
     
@@ -57,6 +57,25 @@
     //[[TestSDKAPI sharedClient] getRequestedByWithDelegate:self];
     
     //[[TestSDKAPI sharedClient] getRelationshipWithUserID:@"38736160" AndWithDelegate:self];
+    
+    //[[TestSDKAPI sharedClient] postCommentWithMediaID:@"392743925499176680_38736160" Text:@"hola" AndWithDelegate:self];
+    
+    //[[TestSDKAPI sharedClient] getCommentsWithMediaID:@"392743925499176680_38736160" AndWithDelegate:self];
+    
+    //[[TestSDKAPI sharedClient] deleteCommentWithCommentID:@"" MediaID:@"392743925499176680_38736160" AndWithDelegate:self];
+    
+    
+    // [[TestSDKAPI sharedClient] getLocationInfoWithLocationID:@"52029886" AndWithDelegate:self];
+    
+    // [[TestSDKAPI sharedClient] getLocationRecentMediaWithLocationID:@"52029886" Parameters:nil AndWithDelegate:self];
+    
+    
+   // NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"-34.56809528990158", @"lat", @"-58.44405770301819", @"lng", nil];
+   // [[TestSDKAPI sharedClient] searchLocationWithParameters:params AndWithDelegate:self];
+    
+    
+    
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
