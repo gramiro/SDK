@@ -39,17 +39,15 @@
     
    // [[TestSDKAPI sharedClient] getFollowsWithUserId:@"self" AndWithDelegate:self];
     
-    
     //[[TestSDKAPI sharedClient] getUserInfoWithUserID:@"self" AndWithDelegate:self];
+    
+    //[[TestSDKAPI sharedClient] getRequestedByWithDelegate:self];
+    
+    //[[TestSDKAPI sharedClient] getRelationshipWithUserID:@"38736160" AndWithDelegate:self];
     
    // [[TestSDKAPI sharedClient] postRelationshipWithAction:@"follow" UserId:@"224680885" AndWithDelegate:self];
     
   //  NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"2",@"count", nil];
-    
-    //[[TestSDKAPI sharedClient] getAuthenticatedUserFeedWithParameters:params AndWithDelegate:self];
-    
-   // [[TestSDKAPI sharedClient] getUserMediaWithUserID:@"self" Parameters:params AndWithDelegate:self];
-    //NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"4",@"count", nil];
     
     //[[TestSDKAPI sharedClient] getAuthenticatedUserFeedWithParameters:params AndWithDelegate:self];
     
@@ -81,25 +79,18 @@
     
     //[[TestSDKAPI sharedClient] getPopularMediaWithDelegate:self];
     
-    //[[TestSDKAPI sharedClient] getRequestedByWithDelegate:self];
-    
-    //[[TestSDKAPI sharedClient] getRelationshipWithUserID:@"38736160" AndWithDelegate:self];
-    
     //[[TestSDKAPI sharedClient] postCommentWithMediaID:@"392743925499176680_38736160" Text:@"hola" AndWithDelegate:self];
     
     //[[TestSDKAPI sharedClient] getCommentsWithMediaID:@"392743925499176680_38736160" AndWithDelegate:self];
     
     //[[TestSDKAPI sharedClient] deleteCommentWithCommentID:@"" MediaID:@"392743925499176680_38736160" AndWithDelegate:self];
     
-    
     // [[TestSDKAPI sharedClient] getLocationInfoWithLocationID:@"52029886" AndWithDelegate:self];
     
     // [[TestSDKAPI sharedClient] getLocationRecentMediaWithLocationID:@"52029886" Parameters:nil AndWithDelegate:self];
     
-    
    // NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"-34.56809528990158", @"lat", @"-58.44405770301819", @"lng", nil];
    // [[TestSDKAPI sharedClient] searchLocationWithParameters:params AndWithDelegate:self];
-    
     
     
     
