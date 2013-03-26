@@ -47,13 +47,14 @@
 -(void)getAuthenticatedUserLikedMediaWithParameters:(NSDictionary*)params AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 -(void)searchUserWithQuery:(NSString*)query AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 
-//RELATIONSHIP ENDPOINT
--(void)getFollowedByWithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate;
--(void)getFollowsWithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate;
--(void)postRelationship:(NSString *)action WithUserId:(NSString *)userID Delegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+//RELATIONSHIPS ENDPOINT
+-(void)getFollowedByWithUserId:(NSString *)userID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+-(void)getFollowsWithUserId:(NSString *)userID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+-(void)postRelationshipWithAction:(NSString *)action UserId:(NSString *)userID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
 -(void)getRequestedByWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 -(void)getRelationshipWithUserID:(NSString*)userID AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 
+<<<<<<< HEAD
 
 //MEDIA ENDPOINT
 -(void)getMediaWithMediaID:(NSString *)mediaID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
@@ -73,4 +74,17 @@
 
 //GEO ENDPOINT
 -(void)getGeoWithGeoId:(NSString *)geoId WithParams:(NSDictionary *)geoParams AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+=======
+//COMMENTS ENDPOINT
+-(void)getCommentsWithMediaID:(NSString*)mediaID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+-(void)postCommentWithMediaID:(NSString*)mediaID Text:(NSString*)text AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+-(void)deleteCommentWithCommentID:(NSString*)comment MediaID:(NSString*)mediaID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+
+//LOCATIONS ENDPOINT
+-(void)getLocationInfoWithLocationID:(NSString*)locationID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+-(void)getLocationRecentMediaWithLocationID:(NSString*)locationID Parameters:(NSDictionary*)params AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+-(void)searchLocationWithParameters:(NSDictionary*)params AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
+
+
+>>>>>>> origin/master
 @end

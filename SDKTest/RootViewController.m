@@ -10,6 +10,7 @@
 #import "DemoViewController.h"
 #import "AFOAuth2Client.h"
 #import "TestSDKAPI.h"
+
 @interface RootViewController ()
 
 @end
@@ -60,7 +61,7 @@
         [self presentModalViewController:navController animated:YES];
     } else
     {
-    [[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"basic", @"relationships", nil]];
+    [[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"comments", nil]];
     [[TestSDKAPI sharedClient] setLoginDelegate:self];
     }
 }
