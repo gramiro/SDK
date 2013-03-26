@@ -54,7 +54,6 @@
 -(void)getRequestedByWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 -(void)getRelationshipWithUserID:(NSString*)userID AndWithDelegate:(NSObject <InstagramRequestsDelegate> *)delegate;
 
-<<<<<<< HEAD
 
 //MEDIA ENDPOINT
 -(void)getMediaWithMediaID:(NSString *)mediaID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
@@ -74,7 +73,7 @@
 
 //GEO ENDPOINT
 -(void)getGeoWithGeoId:(NSString *)geoId WithParams:(NSDictionary *)geoParams AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
-=======
+
 //COMMENTS ENDPOINT
 -(void)getCommentsWithMediaID:(NSString*)mediaID AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
 -(void)postCommentWithMediaID:(NSString*)mediaID Text:(NSString*)text AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
@@ -86,5 +85,4 @@
 -(void)searchLocationWithParameters:(NSDictionary*)params AndWithDelegate:(NSObject<InstagramRequestsDelegate> *)delegate;
 
 
->>>>>>> origin/master
 @end

@@ -30,11 +30,8 @@
 {
     [super viewDidLoad];
     
-<<<<<<< HEAD
     //[[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects:@"relationships", nil]];
-=======
-    //[[TestSDKAPI sharedClient] authorizeWithScopes:[NSArray arrayWithObjects: @"basic", @"relationships", @"comments", nil]];
->>>>>>> origin/master
+
     
     //TEST BY COMMENT-UNCOMMENT THE FOLLOWING LINES
     
@@ -47,19 +44,16 @@
     
    // [[TestSDKAPI sharedClient] postRelationshipWithAction:@"follow" UserId:@"224680885" AndWithDelegate:self];
     
-<<<<<<< HEAD
   //  NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"2",@"count", nil];
     
     //[[TestSDKAPI sharedClient] getAuthenticatedUserFeedWithParameters:params AndWithDelegate:self];
     
    // [[TestSDKAPI sharedClient] getUserMediaWithUserID:@"self" Parameters:params AndWithDelegate:self];
-=======
     //NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"4",@"count", nil];
     
     //[[TestSDKAPI sharedClient] getAuthenticatedUserFeedWithParameters:params AndWithDelegate:self];
     
     //[[TestSDKAPI sharedClient] getUserMediaWithUserID:@"31628480" Parameters:params AndWithDelegate:self];
->>>>>>> origin/master
     
     //[[TestSDKAPI sharedClient] getAuthenticatedUserLikedMediaWithParameters:params AndWithDelegate:self];
     
